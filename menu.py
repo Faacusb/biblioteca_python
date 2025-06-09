@@ -1,10 +1,10 @@
-from libros import agregar_libro,mostrar_libros
+from libros import agregar_libro,mostrar_libros, modificar_libro,borrar_libro
 def menu():
     print('Bienvenido a nuestra biblioteca')
     print('1. Agregar libro')
     print('2. Mostrar libros')
     print('3. Modificar libro')
-    print('4. Eliminar libro')
+    print('4. Borrar libro')
     print('5. Salir')
 
 def abrir_menu():
@@ -22,7 +22,7 @@ def abrir_menu():
             modificar_libro()
 
         elif opcion_menu  == '4':
-            eliminar_libro()
+            borrar_libro()
 
         elif opcion_menu == '5':
             print('Adios.')
