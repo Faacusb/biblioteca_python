@@ -1,3 +1,4 @@
+from libros import agregar_libro
 def menu():
     print('Bienvenido a nuestra biblioteca')
     print('1. Agregar libro')
