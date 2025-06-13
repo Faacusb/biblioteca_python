@@ -1,4 +1,4 @@
-from usuarios import agregar_usuario, mostrar_usuarios, modificar_usuario, borrar_usuario
+from usuarios import agregar_un_usuario, mostrar_un_usuarios, modificar_un_usuario, borrar_un_usuario
 
 def menu_usuarios():
     while True:
