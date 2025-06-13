@@ -1,5 +1,12 @@
 from usuarios import agregar_un_usuario, mostrar_un_usuarios, modificar_un_usuario, borrar_un_usuario
 
+def menu_principal():
+    print("\n Menú Principal: ")
+    print("1. libros")
+    print("2. usuarios")
+    print("3. Salir")
+
+
 def menu_usuarios():
     while True:
         print("\n--- Menú Usuarios ---")
