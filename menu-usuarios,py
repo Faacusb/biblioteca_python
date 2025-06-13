@@ -4,7 +4,7 @@ def menu_usuarios():
     while True:
         print("\n--- Menú Usuarios ---")
         print("1. Agregar usuario")
-        print("2. Mostrar usuarios")
+        print("2. Mostrar usuario")
         print("3. Modificar usuario")
         print("4. Borrar usuario")
         print("5. Volver al menú principal")
@@ -14,7 +14,7 @@ def menu_usuarios():
         if opcion == '1':
             agregar_un_usuario()
         elif opcion == '2':
-            mostrar_un_usuarios()
+            mostrar_un_usuario()
         elif opcion == '3':
             modifica_un_usuario()
         elif opcion == '4':
