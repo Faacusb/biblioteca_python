@@ -1,3 +1,6 @@
+import json
+
+archivo_libros = 'libros.json'
 libros = []
 
 def agregar_libro():
