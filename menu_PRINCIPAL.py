@@ -1,4 +1,5 @@
-from libros import abrir_menu as menu_libros    #importe la funcion menu_libros 
+from menu_libros import abrir_menu as menu_libros  #importe la funcion menu_libros 
+
 
 def menu_principal():
     print("\n Menú Principal")
@@ -8,14 +9,14 @@ def menu_principal():
 def iniciar_menu():
     while True:
        menu_principal()
-        opcion = input("Elegí una opción: ")
+       opcion = input("Elegí una opción: ")
 
-        if opcion == '1':
+       if opcion == '1':
             menu_libros()  
-        elif opcion == '2':
+       elif opcion == '2':
             print("¡nos vemos!")
             break
-        else:
+       else:
             print(" Error. Probá otra vez.")
 
 if __name__ == "__main__": #esto es para que se ejecute directo 
