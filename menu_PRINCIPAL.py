@@ -19,4 +19,4 @@ def ejecutar_menu():
             print(" Error. Probá otra vez.")
 
 if __name__ == "__main__": #esto es para que se ejecute directo 
-    iniciar_menu()
+    ejecutar_menu()
