@@ -1,4 +1,10 @@
-from usuarios import agregar_usuario, mostrar_usuarios, modificar_usuario, borrar_usuario
+from usuarios import (
+    agregar_usuario,
+    mostrar_usuarios,
+    modificar_usuario,
+    borrar_usuario,
+    cargar_usuarios
+)
 
 def menu_principal():
     print("\n Menú Principal: ")
@@ -6,8 +12,9 @@ def menu_principal():
     print("2. usuarios")
     print("3. Salir")
 
-
 def menu_usuarios():
+    cargar_usuarios()  # Cargar usuarios al iniciar el menú
+
     while True:
         print("\n--- Menú Usuarios ---")
         print("1. Agregar usuario")
@@ -30,6 +37,4 @@ def menu_usuarios():
             print("Volviendo al menú principal...")
             break
         else:
-            print("la  opción no es  válida.")
-
-
+            print("La opción no es válida.")
