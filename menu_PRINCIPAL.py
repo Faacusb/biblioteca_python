@@ -5,7 +5,7 @@ def menu_principal():
     print("1. Libros")
     print("2. Salir")
 
-def ejecutar_menu():
+def iniciar_menu():
     while True:
        menu_principal()
         opcion = input("Elegí una opción: ")
@@ -19,4 +19,4 @@ def ejecutar_menu():
             print(" Error. Probá otra vez.")
 
 if __name__ == "__main__": #esto es para que se ejecute directo 
-    ejecutar_menu()
+    iniciar_menu()
