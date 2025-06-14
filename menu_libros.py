@@ -32,5 +32,6 @@ def abrir_menu():
         else:
             print('Opcion no valida, pruebe otra opcion.')   
 
+ 
+    abrir_menu()
 
-abrir_menu()
