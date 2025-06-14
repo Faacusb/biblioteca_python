@@ -1,4 +1,4 @@
-from menu_libros import archivo_libros as menu_libros  #importe la funcion menu_libros 
+from menu_libros import abrir_menu as menu_libros  #importe la funcion menu_libros 
 
 
 def menu_principal():
