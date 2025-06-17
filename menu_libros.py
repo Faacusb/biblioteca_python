@@ -15,7 +15,7 @@ def abrir_menu():
         print('2. Mostrar libros')
         print('3. Modificar libro')
         print('4. Borrar libro')
-        print('5. Salir')
+        print('5. Volver al Menu Principal')
 
         opcion_menu = input('Elija una opción: ')
 

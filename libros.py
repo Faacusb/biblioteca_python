@@ -23,10 +23,16 @@ def guardar_libros():
 
 def agregar_libro():
     titulo = input('Ingrese el titulo del libro: ')
+    
+    for libro in libros:
+        if libro['titulo'].lower() == titulo.lower():
+            print(f"Ya existe ese titulo en la biblioteca '{titulo}'.")
+            return
+
     autor  = input('Ingrese el autor: ')
     anio   = input('Ingrese el año del libro: ')
 
-    libro = {'titulo': titulo, 'autor': autor, 'año': anio}
+    libro = {'titulo': titulo, 'autor': autor, 'año': anio, 'prestado':False, 'socio_prestamo':None}
     libros.append(libro)
     guardar_libros()
     print('Libro cargado.')
@@ -40,6 +46,10 @@ def mostrar_libros():
             print(f"{i}. {libro['titulo']} - Autor: {libro['autor']} - año: {libro['año']}")
 
 def modificar_libro():
+    if not libros:
+        print("No hay libros para modificar.")
+        return
+
     mostrar_libros()
     try:
         num_libro_modificar = int(input('Ingrese el número del libro que desea modificar: ')) - 1

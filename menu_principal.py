@@ -1,10 +1,11 @@
 from menu_libros import abrir_menu as menu_libros  #importe la funcion menu_libros 
-
+from menu_usuarios import menu_usuarios  #importe la funcion menu_usuarios
 
 def menu_principal():
     print("\n Menú Principal")
     print("1. Libros")
-    print("2. Salir")
+    print("2. Usuarios")
+    print("3. Salir")
 
 def iniciar_menu():
     while True:
@@ -13,7 +14,11 @@ def iniciar_menu():
 
        if opcion == '1':
             menu_libros()  
+
        elif opcion == '2':
+            menu_usuarios()
+            
+       elif opcion == '3':
             print("¡nos vemos!")
             break
        else:

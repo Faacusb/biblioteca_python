@@ -57,6 +57,7 @@ def devolver_libro(usuario, libro):
             prestamo["fecha_devolucion"] = datetime.now().strftime("%Y-%m-%d")
             guardar_datos(datos)
             print(f"Libro '{libro}' devuelto por {usuario}.")
+            return
     print("Error: No se encontró un préstamo activo para este usuario y libro.")
 
 # Registros de reservas 

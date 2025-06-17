@@ -1,0 +1,9 @@
+[
+    {
+        "titulo": "Mickey Mouse",
+        "autor": "disney",
+        "año": "1999",
+        "prestado": false,
+        "socio_prestamo": null
+    }
+]
