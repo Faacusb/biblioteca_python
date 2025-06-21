@@ -78,7 +78,7 @@ def devolver_libro(usuario, libro):
 # Función para seleccionar un usuario de listado 
 def seleccionar_usuario():
     try:
-        with open("usuarios.json", "r") as archivo:
+        with open(archivo_usuarios, "r") as archivo:
             usuarios = json.load(archivo)
     except FileNotFoundError:
         print("No se encontró el archivo de usuarios.")
@@ -107,7 +107,7 @@ def seleccionar_usuario():
 # Función para seleccionar un libro de listado 
 def seleccionar_libro():
     try:
-        with open("libros.json", "r") as archivo:
+        with open(archivo_libros, "r") as archivo:
             libros = json.load(archivo)
     except FileNotFoundError:
         print("No se encontró el archivo de libros.")
