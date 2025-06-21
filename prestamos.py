@@ -1,153 +1,159 @@
 import json
+import os
+from datetime import datetime
+
 from usuarios import archivo_usuarios
 from libros import archivo_libros
-from datetime import datetime
-from libros import libro_existe
-from usuarios import usuario_existe
 
-ARCHIVO_DATOS = "biblioteca_python.json" 
+archivo_prestamos = 'prestamos.json'
 
-# Función para cargar la información de préstamos
-def cargar_datos():
-    try:
-        with open(ARCHIVO_DATOS, "r") as archivo:
-            return json.load(archivo)
-    except FileNotFoundError:
-        return {"prestamos": []}
 
-# Función para guardar datos
-def guardar_datos(datos):
-    with open(ARCHIVO_DATOS, "w") as archivo:
-         json.dump(datos, archivo, indent=4)
+# Cargar datos de préstamos
+def cargar_prestamos():
+    if os.path.exists(archivo_prestamos):
+        with open(archivo_prestamos, 'r', encoding='utf-8') as f:
+            return json.load(f)
+    return []
 
-# Registro de préstamos
-def registrar_prestamos(usuario, libro):
-    if not usuario_existe(usuario):
-        print(f"Error: El usuario '{usuario}' no está registrado.")
-        return
-    if not libro_existe(libro):
-        print(f"Error: El libro '{libro}' no existe en el catálogo.")
+# Guardar préstamos
+def guardar_prestamos(prestamos):
+    with open(archivo_prestamos, 'w', encoding='utf-8') as f:
+        json.dump(prestamos, f, indent=4, ensure_ascii=False)
+
+# Función para registrar un préstamo
+def registrar_prestamo():
+    usuario = seleccionar_usuario()
+    if not usuario:
         return
 
-    datos = cargar_datos()
-    # Verificamos que el libro no esté prestado
-    for prestamo in datos["prestamos"]:
-        if prestamo["libro"] == libro and prestamo["estado"] == "prestado":
-            print(f"Error: El libro '{libro}' ya está prestado.")
-            return
+    libro = seleccionar_libro()
+    if not libro:
+        return
 
-    prestamo = {
-        "usuario": usuario,
-        "libro": libro,
+    if libro['prestado']:
+        print(f"El libro '{libro['titulo']}' ya está prestado.")
+        return
+
+    prestamos = cargar_prestamos()
+    nuevo_prestamo = {
+        "socio": usuario["socio"],
+        "nombre": f"{usuario['nombre']} {usuario['apellido']}",
+        "titulo_libro": libro["titulo"],
         "fecha_prestamo": datetime.now().strftime("%Y-%m-%d"),
         "estado": "prestado"
     }
-    datos["prestamos"].append(prestamo)
-    guardar_datos(datos)
-    print(f"Préstamo registrado: {usuario} eligió '{libro}'.")
+    prestamos.append(nuevo_prestamo)
 
-# Mostrar los préstamos registrados
+    # Marcar el libro como prestado
+    libro['prestado'] = True
+    libro['socio_prestamo'] = usuario["socio"]
+
+    guardar_prestamos(prestamos)
+    actualizar_libros()
+    print(f"Préstamo registrado para {usuario['nombre']} - Libro: '{libro['titulo']}'")
+
+# Mostrar préstamos
 def mostrar_prestamos():
-    datos = cargar_datos()
-    if datos["prestamos"]:
-        print("\nLista de Préstamos:")
-        for i, prestamo in enumerate(datos["prestamos"], start=1):
-            print(
-                f"{i}. Usuario: {prestamo['usuario']}, Libro: {prestamo['libro']}, "
-                f"Fecha: {prestamo['fecha_prestamo']}, Estado: {prestamo['estado']}"
-            )
-    else:
+    prestamos = cargar_prestamos()
+    if not prestamos:
         print("No hay préstamos registrados.")
-
-# Devolver un libro prestado
-def devolver_libro(usuario, libro):
-    if not usuario_existe(usuario):
-        print(f"Error: El usuario '{usuario}' no está registrado.")
-        return 
-    if not libro_existe(libro):
-        print(f"Error: El libro '{libro}' no existe en el catálogo.")
         return
-    datos = cargar_datos()
-    for prestamo in datos["prestamos"]:
-        if prestamo["usuario"] == usuario and prestamo["libro"] == libro and prestamo["estado"] == "prestado":
+    print("\nLista de Préstamos:")
+    for p in prestamos:
+        estado = p["estado"]
+        linea = f"Socio {p['socio']} - {p['nombre']} → '{p['titulo_libro']}' el {p['fecha_prestamo']} - Estado: {estado}"
+        if estado == "devuelto":
+            linea += f" (Devolución: {p['fecha_devolucion']})"
+        print(linea)
+
+# Devolver libro
+def devolver_libro():
+    prestamos = cargar_prestamos()
+    socio = input("Ingrese número de socio: ")
+    titulo = input("Ingrese título del libro: ")
+
+    for prestamo in prestamos:
+        if str(prestamo["socio"]) == socio and prestamo["titulo_libro"].lower() == titulo.lower() and prestamo["estado"] == "prestado":
             prestamo["estado"] = "devuelto"
             prestamo["fecha_devolucion"] = datetime.now().strftime("%Y-%m-%d")
-            guardar_datos(datos)
-            print(f"Libro '{libro}' devuelto por {usuario}.")
-            return
-    print("Error: No se encontró un préstamo activo para este usuario y libro.")
 
-# Función para seleccionar un usuario de listado 
+            # Actualizar en libros.json
+            actualizar_estado_libro(titulo, False, None)
+
+            guardar_prestamos(prestamos)
+            print(f"Libro '{titulo}' devuelto correctamente.")
+            return
+
+    print("No se encontró un préstamo activo con esos datos.")
+
+# ----------- Auxiliares ------------
+
 def seleccionar_usuario():
-    try:
-        with open(archivo_usuarios, "r") as archivo:
-            usuarios = json.load(archivo)
-    except FileNotFoundError:
-        print("No se encontró el archivo de usuarios.")
+    if not os.path.exists(archivo_usuarios):
+        print("Archivo de usuarios no encontrado.")
         return None
+    with open(archivo_usuarios, 'r', encoding='utf-8') as f:
+        usuarios = json.load(f)
 
     if not usuarios:
         print("No hay usuarios registrados.")
         return None
 
-    print("Seleccione un usuario:")
-    for i, usuario in enumerate(usuarios, start=1):
-        print(f"{i}. {usuario}")
+    print("\nUsuarios:")
+    for u in usuarios:
+        print(f"{u['socio']}: {u['nombre']} {u['apellido']}")
 
-    opcion = input("Ingrese el número del usuario: ")
     try:
-        opcion = int(opcion)
-        if 1 <= opcion <= len(usuarios):
-            return usuarios[opcion - 1]
-        else:
-            print("Opción inválida.")
-            return None
+        socio = int(input("Ingrese el número de socio: "))
+        for u in usuarios:
+            if u["socio"] == socio:
+                return u
+        print("No se encontró ese número de socio.")
     except ValueError:
-        print("Entrada inválida. Se esperaba un número.")
-        return None
+        print("Número inválido.")
+    return None
 
-# Función para seleccionar un libro de listado 
 def seleccionar_libro():
-    try:
-        with open(archivo_libros, "r") as archivo:
-            libros = json.load(archivo)
-    except FileNotFoundError:
-        print("No se encontró el archivo de libros.")
+    if not os.path.exists(archivo_libros):
+        print("Archivo de libros no encontrado.")
         return None
+    with open(archivo_libros, 'r', encoding='utf-8') as f:
+        libros = json.load(f)
 
     if not libros:
-        print("No hay libros registrados.")
+        print("No hay libros disponibles.")
         return None
 
-    print("Seleccione un libro:")
+    print("\nLibros:")
     for i, libro in enumerate(libros, start=1):
-        print(f"{i}. {libro}")
+        estado = " (PRESTADO)" if libro.get("prestado") else ""
+        print(f"{i}. {libro['titulo']} - {libro['autor']}{estado}")
 
-    opcion = input("Ingrese el número del libro: ")
     try:
-        opcion = int(opcion)
-        if 1 <= opcion <= len(libros):
-            return libros[opcion - 1]
-        else:
-            print("Opción inválida.")
-            return None
+        opcion = int(input("Ingrese el número del libro: ")) - 1
+        if 0 <= opcion < len(libros):
+            return libros[opcion]
     except ValueError:
-        print("Entrada inválida. Se esperaba un número.")
-        return None
+        pass
+    print("Selección inválida.")
+    return None
 
-# Menú para registrar un préstamo 
-def menu_registrar_prestamo():
-    usuario = seleccionar_usuario()
-    if usuario is None:
-        return
+def actualizar_libros():
+    with open(archivo_libros, 'r', encoding='utf-8') as f:
+        libros = json.load(f)
+    with open(archivo_libros, 'w', encoding='utf-8') as f:
+        json.dump(libros, f, indent=4, ensure_ascii=False)
 
-    libro = seleccionar_libro()
-    if libro is None:
-        return
-
-    registrar_prestamos(usuario, libro)
+def actualizar_estado_libro(titulo, prestado, socio_prestamo):
+    with open(archivo_libros, 'r', encoding='utf-8') as f:
+        libros = json.load(f)
+    for libro in libros:
+        if libro["titulo"].lower() == titulo.lower():
+            libro["prestado"] = prestado
+            libro["socio_prestamo"] = socio_prestamo
+            break
+    with open(archivo_libros, 'w', encoding='utf-8') as f:
+        json.dump(libros, f, indent=4, ensure_ascii=False)
 
 if __name__ == "__main__":
-    menu_registrar_prestamo()
-
-
+    registrar_prestamo()
