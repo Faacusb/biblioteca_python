@@ -86,3 +86,11 @@ def borrar_libro():
             print('Número de libro inválido.')
     except ValueError:
         print('Por favor, ingrese un número válido.')   
+
+def libro_existe(titulo):
+    try:
+        with open(archivo_libros, "r", encoding="utf-8") as archivo:
+            lista_libros = json.load(archivo)
+        return any(l["titulo"].lower() == titulo.lower() for l in lista_libros)
+    except FileNotFoundError:
+        return False

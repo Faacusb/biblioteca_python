@@ -2,6 +2,8 @@ import json
 from usuarios import archivo_usuarios
 from libros import archivo_libros
 from datetime import datetime
+from libros import libro_existe
+from usuarios import usuario_existe
 
 ARCHIVO_DATOS = "biblioteca_python.json" 
 

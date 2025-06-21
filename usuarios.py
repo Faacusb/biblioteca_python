@@ -84,3 +84,10 @@ def borrar_usuario():
     except ValueError:
         print("Por favor, ingrese un número válido.")
 
+def usuario_existe(socio_id):
+    try:
+        with open(archivo_usuarios, "r", encoding="utf-8") as archivo:
+            lista_usuarios = json.load(archivo)
+        return any(u["socio"] == socio_id for u in lista_usuarios)
+    except FileNotFoundError:
+        return False

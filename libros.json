@@ -5,5 +5,96 @@
         "año": "1999",
         "prestado": false,
         "socio_prestamo": null
+    },
+    {
+        "titulo": "Habitos Atomicos",
+        "autor": "James Clear",
+        "año": "2011",
+        "prestado": false,
+        "socio_prestamo": null
+    },
+    {
+        "titulo": "El club de las 5 AM",
+        "autor": "Robin Sharma",
+        "año": "2015",
+        "prestado": false,
+        "socio_prestamo": null
+    },
+    {
+        "titulo": "El secreto de sus ojos",
+        "autor": "Campanella",
+        "año": "2008",
+        "prestado": false,
+        "socio_prestamo": null
+    },
+    {
+        "titulo": "Cien años de soledad",
+        "autor": "Gabriel García Márquez",
+        "año": "1967",
+        "prestado": false,
+        "socio_prestamo": null
+    },
+    {
+        "titulo": "Rayuela",
+        "autor": "Julio Cortázar",
+        "año": "1963",
+        "prestado": false,
+        "socio_prestamo": null
+    },
+    {
+        "titulo": "El túnel",
+        "autor": "Ernesto Sabato",
+        "año": "1948",
+        "prestado": false,
+        "socio_prestamo": null
+    },
+    {
+        "titulo": "1984",
+        "autor": "George Orwell",
+        "año": "1949",
+        "prestado": false,
+        "socio_prestamo": null
+    },
+    {
+        "titulo": "Fahrenheit 451",
+        "autor": "Ray Bradbury",
+        "año": "1953",
+        "prestado": false,
+        "socio_prestamo": null
+    },
+    {
+        "titulo": "Los siete locos",
+        "autor": "Roberto Arlt",
+        "año": "1929",
+        "prestado": false,
+        "socio_prestamo": null
+    },
+    {
+        "titulo": "Don Quijote de la Mancha",
+        "autor": "Miguel de Cervantes",
+        "año": "1605",
+        "prestado": false,
+        "socio_prestamo": null
+    },
+    {
+        "titulo": "La invención de Morel",
+        "autor": "Adolfo Bioy Casares",
+        "año": "1940",
+        "prestado": false,
+        "socio_prestamo": null
+    },
+    {
+        "titulo": "Crónica de una muerte anunciada",
+        "autor": "Gabriel García Márquez",
+        "año": "1981",
+        "prestado": false,
+        "socio_prestamo": null
+    },
+    {
+        "titulo": "El Aleph",
+        "autor": "Jorge Luis Borges",
+        "año": "1949",
+        "prestado": false,
+        "socio_prestamo": null
     }
 ]

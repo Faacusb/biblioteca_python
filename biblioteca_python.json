@@ -1,0 +1,17 @@
+{
+    "prestamos": [
+        {
+            "usuario": 1,
+            "libro": "Mickey Mouse",
+            "fecha_prestamo": "2025-06-21",
+            "estado": "devuelto",
+            "fecha_devolucion": "2025-06-21"
+        },
+        {
+            "usuario": 1,
+            "libro": "Habitos Atomicos",
+            "fecha_prestamo": "2025-06-21",
+            "estado": "prestado"
+        }
+    ]
+}

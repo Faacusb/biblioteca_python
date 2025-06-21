@@ -1,1 +1,42 @@
-[]
+[
+    {
+        "socio": 1,
+        "nombre": "Facundo",
+        "apellido": "Alvarez",
+        "tipo_doc": "Dni",
+        "documento": "12312334",
+        "direccion": "aa123"
+    },
+    {
+        "socio": 2,
+        "nombre": "Lucía",
+        "apellido": "González",
+        "tipo_doc": "Dni",
+        "documento": "28765432",
+        "direccion": "Calle Falsa 123"
+    },
+    {
+        "socio": 3,
+        "nombre": "Martín",
+        "apellido": "Pérez",
+        "tipo_doc": "Dni",
+        "documento": "32165498",
+        "direccion": "Av. Mitre 456"
+    },
+    {
+        "socio": 4,
+        "nombre": "Carla",
+        "apellido": "Romero",
+        "tipo_doc": "Dni",
+        "documento": "15975346",
+        "direccion": "San Martín 789"
+    },
+    {
+        "socio": 5,
+        "nombre": "Julián",
+        "apellido": "Suárez",
+        "tipo_doc": "Pasaporte",
+        "documento": "AA459632",
+        "direccion": "Belgrano 1450"
+    }
+]
